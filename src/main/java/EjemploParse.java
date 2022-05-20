@@ -1,3 +1,6 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -46,21 +49,35 @@ public class EjemploParse {
 
             default->{
 
-
-
-
             }
 
         }
 
-        /*String cadenaJSON = "";
+        //Para ("https://jsonplaceholder.typicode.com/todos/1")
+        /*String cadenaJSON = response.body();
+        //imprimir respuesta
+        System.out.println(cadenaJSON);
+        //Creamos objeto JSON
         JSONObject obj = new JSONObject(cadenaJSON);
-        String vivo = obj.getJSONObject("pageInfo").getString("pageName");
-        JSONArray arr = obj.getJSONArray("posts");
+        //Sacamos título
+        String titulo = obj.getString("title");
+        //imprimimos título
+        System.out.println(titulo);*/
+
+
+        //Para ("https://api.openweathermap.org/data/2.5/weather?q=vigo&appid=214d3edca1f88b6812bfef609598d5aa")
+
+        String cadenaJSON = response.body();
+        JSONObject obj = new JSONObject(cadenaJSON);
+        float temperatura = obj.getJSONObject("main").getFloat("temp");
+        System.out.println("La temperatura actual en "+obj.getString("name") + " es de: " + Math.round (((temperatura-273.15)*100)/100f));
+        /*JSONArray arr = obj.getJSONArray("posts");
         for (int i = 0; i < arr.length(); i++) {
             String post_id = arr.getJSONObject(i).getString("post_id");
             System.out.println(post_id);
         }
-        System.out.println(vivo);*/
+        System.out.println(titulo);*/
+
+
     }
 }
